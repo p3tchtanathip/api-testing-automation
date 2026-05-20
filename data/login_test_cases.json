@@ -1,0 +1,57 @@
+[
+    {
+        "case_id": "TC001",
+        "case_name": "Success Login",
+        "email": "test@gmail.com",
+        "password": "12345678",
+        "expected_status": 200
+    },
+    {
+        "case_id": "TC002",
+        "case_name": "Wrong Password",
+        "email": "test@gmail.com",
+        "password": "WrongPassword!",
+        "expected_status": 401,
+        "expected_message": "Invalid credentials"
+    },
+    {
+        "case_id": "TC003",
+        "case_name": "Email Not Found",
+        "email": "notfound@example.com",
+        "password": "12345678",
+        "expected_status": 404,
+        "expected_message": "User not found"
+    },
+    {
+        "case_id": "TC004",
+        "case_name": "Empty Email",
+        "email": "",
+        "password": "12345678",
+        "expected_status": 400,
+        "expected_message": "Email is required"
+    },
+    {
+        "case_id": "TC005",
+        "case_name": "Empty Password",
+        "email": "test@gmail.com",
+        "password": "",
+        "expected_status": 400,
+        "expected_message": "Password is required"
+    },
+    {
+        "case_id": "TC006",
+        "case_name": "Invalid Email Format",
+        "email": "invalid-email-format",
+        "password": "12345678",
+        "expected_status": 400,
+        "expected_message": "Invalid email format"
+    },
+    {
+        "case_id": "TC007",
+        "case_name": "SQL Injection Attempt",
+        "email": "admin' OR '1'='1",
+        "password": "12345678",
+        "expected_status": 400,
+        "expected_message": "Invalid credentials"
+    }
+]

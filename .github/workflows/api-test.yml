@@ -1,0 +1,38 @@
+name: API Testing Automation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  api-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Newman API Tests
+        run: npm run test:login
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-html-report
+          path: reports/login-report.html
+
+      - name: Upload XML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-junit-report
+          path: reports/login-report.xml

@@ -1,0 +1,17 @@
+{
+  "name": "api-testing-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:login": "newman run collection/login-api.postman_collection.json -e environment/dev.postman_environment.json -r cli,junit,htmlextra --reporter-junit-export report/login-report.xml --reporter-htmlextra-export report/login-report.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "newman": "^6.2.2",
+    "newman-reporter-htmlextra": "^1.23.1"
+  }
+}

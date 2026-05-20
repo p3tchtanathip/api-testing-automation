@@ -1,0 +1,98 @@
+{
+  "info": {
+    "_postman_id": "c0a6b830-e058-4ce5-8e06-ba5857701784",
+    "name": "login-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34550173"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const caseName = pm.iterationData.get(\"case_name\");",
+              "const expectedStatus = pm.iterationData.get(\"expected_status\");",
+              "const expectedMessage = pm.iterationData.get(\"expected_message\");",
+              "",
+              "pm.test(`${caseName} - Status code is ${expectedStatus}`, () => {",
+              "    pm.response.to.have.status(expectedStatus);",
+              "});",
+              "",
+              "pm.test(`${caseName} - Correct response message`, () => {",
+              "    const responseData = pm.response.json();",
+              "    pm.expect(responseData.message).to.equal(expectedMessage);",
+              "});",
+              "",
+              "if (expectedStatus === 200) {",
+              "    pm.test(`${caseName} - Should return access token`, () => {",
+              "        const responseData = pm.response.json();",
+              "        pm.expect(responseData).to.have.property('token');",
+              "    });",
+              "}",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/Auth/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "Auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "var responseBody = pm.response.json();",
+          "var accessToken = responseBody.accessToken;",
+          "pm.environment.set(\"access_token\", accessToken);"
+        ]
+      }
+    }
+  ]
+}
