@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:login": "newman run collection/login-api.postman_collection.json -e environment/dev.postman_environment.json -r cli,junit,htmlextra --reporter-junit-export report/login-report.xml --reporter-htmlextra-export report/login-report.html"
+    "test:login": "newman run collection/login-api.postman_collection.json -e environment/dev.postman_environment.json -d data/login_test_cases.json -r cli,junit,htmlextra --reporter-junit-export report/login-report.xml --reporter-htmlextra-export report/login-report.html"
   },
   "keywords": [],
   "author": "",
