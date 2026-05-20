@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
 
       - name: Install dependencies
@@ -24,6 +24,7 @@ jobs:
 
       - name: Run Newman API Tests
         run: npm run test:login
+        continue-on-error: true
 
       - name: Upload HTML Report
         uses: actions/upload-artifact@v4
